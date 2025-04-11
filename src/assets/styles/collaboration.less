@@ -1,0 +1,54 @@
+/* 协同编辑光标样式 */
+.collaboration-cursor {
+  position: relative;
+  z-index: 20;
+  pointer-events: none;
+  caret-color: transparent;
+  border-left: 2px solid transparent;
+  border-right: 2px solid transparent;
+  margin-left: -2px;
+  margin-right: -2px;
+  word-break: normal;
+  display: inline-block;
+}
+
+.collaboration-cursor-info {
+  position: absolute;
+  bottom: 100%;
+  left: -1px;
+  border-radius: 4px;
+  padding: 4px 6px;
+  font-size: 12px;
+  font-weight: 500;
+  pointer-events: none;
+  white-space: nowrap;
+  color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 30;
+}
+
+.collaboration-cursor:hover .collaboration-cursor-info {
+  opacity: 1;
+}
+
+/* 确保光标在编辑时始终可见 */
+.ProseMirror .collaboration-cursor {
+  margin-left: -2px;
+  margin-right: -2px;
+  pointer-events: none;
+  position: relative;
+  word-break: normal;
+  display: inline-block;
+}
+
+/* 光标头像样式 */
+.collaboration-cursor-info img {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+  border: 1px solid white;
+}

@@ -1,0 +1,99 @@
+/* 全局协同编辑光标样式 */
+.collaboration-cursor__caret {
+  position: relative;
+  margin-left: -1px;
+  margin-right: -1px;
+  word-break: normal;
+  pointer-events: none;
+  min-height: 1.2em;
+  display: inline-block;
+  vertical-align: text-bottom;
+}
+
+/* 处理未激活的光标（在页面顶部堆积的光标） */
+.ProseMirror > .collaboration-cursor__caret:first-child:not(:only-child),
+.ProseMirror > .collaboration-cursor__caret:first-child:not(:only-child) * {
+  position: absolute;
+  opacity: 0 !important;
+  pointer-events: none;
+  height: 0;
+  overflow: hidden;
+  z-index: -1;
+  visibility: hidden;
+}
+
+.collaboration-cursor__caret::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: var(--cursor-color, currentColor);
+  animation: cursor-blink 1.2s ease-in-out infinite;
+}
+
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* 光标悬浮头像 */
+.collaboration-cursor__avatar-container {
+  position: absolute;
+  top: -30px;
+  left: -5px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 1000;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  opacity: 0.3;
+  transform: scale(0.9);
+}
+
+.collaboration-cursor__caret:hover .collaboration-cursor__avatar-container {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* 光标头像样式 */
+.collaboration-cursor__avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--cursor-color, currentColor);
+}
+
+/* 光标信息悬浮框 */
+.collaboration-cursor__label {
+  position: absolute;
+  top: -1.8em;
+  left: -5px;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: normal;
+  white-space: nowrap;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 3px;
+  user-select: none;
+  pointer-events: none;
+  z-index: 1000;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transform: translateY(5px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.collaboration-cursor__caret:hover .collaboration-cursor__label {
+  opacity: 1;
+  transform: translateY(0);
+}

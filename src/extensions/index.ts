@@ -33,6 +33,7 @@ import BreakMarks from './break-marks'
 import BulletList from './bullet-list'
 import Callout from './callout'
 import CodeBlock from './code-block'
+import UmoCollaboration from './collaboration'
 import Datetime from './datetime'
 import Echarts from './echarts'
 import File from './file'
@@ -70,7 +71,7 @@ export const getDefaultExtensions = ({
   options: { value: UmoEditorOptions }
   uploadFileMap: { value: any }
 }) => {
-  const { dicts, page, document: doc, users, file } = options.value
+  const { dicts, page, document: doc, users, file, collaboration } = options.value
 
   const extensions = [
     StarterKit.configure({
@@ -199,6 +200,17 @@ export const getDefaultExtensions = ({
     }),
     Echarts,
     typeWriter,
+
+    // 协同编辑
+    UmoCollaboration.configure({
+      enabled: collaboration?.enabled ?? false,
+      documentName: collaboration?.documentName ?? 'default-document',
+      websocketUrl: collaboration?.websocketUrl ?? 'ws://localhost:1234',
+      user: collaboration?.user ?? {
+        name: 'Anonymous',
+        color: '#' + Math.floor(Math.random() * 16777215).toString(16),
+      },
+    }),
   ]
 
   return extensions

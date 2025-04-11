@@ -1,0 +1,14 @@
+{
+  "name": "umo-editor-collaboration-server",
+  "version": "1.0.0",
+  "description": "WebSocket server for Umo Editor collaboration",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "ws": "^8.13.0",
+    "y-websocket": "^1.5.0",
+    "yjs": "^13.6.7"
+  }
+}

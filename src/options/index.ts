@@ -89,6 +89,15 @@ const defaultOptions: UmoEditorOptions = {
       interval: 300000,
     },
   },
+  collaboration: {
+    enabled: false,
+    documentName: 'default-document',
+    websocketUrl: 'ws://localhost:1234',
+    user: {
+      name: 'Anonymous',
+      color: '#' + Math.floor(Math.random() * 16777215).toString(16),
+    },
+  },
   ai: defaultAiOptions,
   echarts: {
     mode: 1,
@@ -912,6 +921,50 @@ const ojbectSchema = new ObjectSchema({
           'Key "onCustomImportWordMethod" must be a async function.',
         )
       }
+    },
+    required: false,
+  },
+  collaboration: {
+    merge: 'replace',
+    validate: 'object',
+    schema: {
+      enabled: {
+        merge: 'replace',
+        validate: 'boolean',
+        required: false,
+      },
+      documentName: {
+        merge: 'replace',
+        validate: 'string',
+        required: false,
+      },
+      websocketUrl: {
+        merge: 'replace',
+        validate: 'string',
+        required: false,
+      },
+      user: {
+        merge: 'replace',
+        validate: 'object',
+        schema: {
+          name: {
+            merge: 'replace',
+            validate: 'string',
+            required: false,
+          },
+          color: {
+            merge: 'replace',
+            validate: 'string',
+            required: false,
+          },
+          avatar: {
+            merge: 'replace',
+            validate: 'string',
+            required: false,
+          },
+        },
+        required: false,
+      },
     },
     required: false,
   },

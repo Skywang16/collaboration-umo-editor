@@ -12,6 +12,31 @@
 <script setup lang="ts">
 import { shortId } from '@/utils/short-id'
 
+// 生成鲜艳的随机颜色
+function getBrightColor() {
+  // 鲜艳颜色数组
+  const brightColors = [
+    '#FF5733', // 亮橙色
+    '#FFC300', // 金黄色
+    '#C70039', // 深红色
+    '#900C3F', // 深紫色
+    '#581845', // 深紫红色
+    '#2E86C1', // 蓝色
+    '#17A589', // 绿色
+    '#D35400', // 橙色
+    '#7D3C98', // 紫色
+    '#2ECC71', // 绿色
+    '#F1C40F', // 黄色
+    '#E74C3C', // 红色
+    '#3498DB', // 浅蓝色
+    '#1ABC9C', // 青绿色
+    '#9B59B6', // 紫色
+  ]
+
+  // 随机选择一个颜色
+  return brightColors[Math.floor(Math.random() * brightColors.length)]
+}
+
 const editorRef = $ref(null)
 const templates = [
   {
@@ -33,8 +58,9 @@ const options = $ref({
     // menus: ['base'],
   },
   document: {
-    title: '测试文档',
-    content: localStorage.getItem('document.content') ?? '<p>测试文档</p>',
+    title: '协同编辑测试文档',
+    content:
+      localStorage.getItem('document.content') ?? '<p>协同编辑测试文档</p>',
     characterLimit: 10000,
   },
   page: {
@@ -50,6 +76,16 @@ const options = $ref({
     //   'video/mp4',
     //   'audio/*',
     // ],
+  },
+  collaboration: {
+    enabled: true,
+    documentName: 'test-document',
+    websocketUrl: 'ws://localhost:1234',
+    user: {
+      name: `用户${Math.floor(Math.random() * 1000)}`,
+      color: getBrightColor(),
+      avatar: `https://api.dicebear.com/7.x/micah/svg?seed=${Math.random()}&backgroundColor=b6e3f4,c0aede,d1d4f9&scale=80&radius=50`,
+    },
   },
   ai: {
     assistant: {

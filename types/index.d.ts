@@ -1,6 +1,8 @@
 import type { Extension } from '@tiptap/core'
 import type { AsyncFunction } from '@tool-belt/type-predicates'
 
+import type { CollaborationOptions } from './collaboration'
+
 export type SupportedLocale = 'en-US' | 'zh-CN' | 'ru-RU'
 export interface MarginOption {
   left: number
@@ -232,6 +234,7 @@ export interface UmoEditorOptions {
   users?: UserItem[]
   extensions?: Extension[]
   translations?: Record<string, unknown>
+  collaboration?: CollaborationOptions
   onSave?: AsyncFunction
   onFileUpload?: (file: File) => Promise<{ id: string; url: string }>
   onFileDelete?: CallableFunction
